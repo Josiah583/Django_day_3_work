@@ -43,7 +43,7 @@ class Products(models.Model):
 class Meta:
     ordering = {'name', '-price',}
     verbose_name = 'products'
-    constraints = [models.CheckConstraint(check=Q('price__gt=12000'))]
+    constraints = [models.CheckConstraint(check=Q('price__gt=12000'), name="price_gt_12000")]
     
 
 
