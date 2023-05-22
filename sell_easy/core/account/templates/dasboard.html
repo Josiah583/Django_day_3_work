@@ -1,0 +1,26 @@
+{% extends 'baside.html'%}
+
+{%block title%}Dasboard{% endblock %}
+{%block content%}
+
+<div class = "container">
+    <aside>
+        <div>
+            {% {% comment "" %}{% endcomment %}%}\
+            <h2>{{store.owner.first_name}}</h2>
+        </div>
+        <p>products</p>
+    </aside>
+    <main>
+        <h2>Welcome, {{user_name}}</h2>
+        <h3> This is a Dasboard</h3>
+        {%for product in store.product.all%}
+        <div>
+            <h1>{{product.name|capfirst}}</h1>
+            <p>{{product.price}} </p>
+        </div>
+        {%endfor%}
+    </main>
+</div>
+{%endblock%}
+        

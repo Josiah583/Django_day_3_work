@@ -1,5 +1,5 @@
 from django.db import models
-from django.contrib.auth.models import User
+from core.account.models import Profile
 from django.db.models import Q 
 
 # Create your models here.
@@ -7,11 +7,15 @@ from django.db.models import Q
 # models
 
 class Store(models.Model):
-    owner = models.OneToOneField(User, on_delete=models.CASCADE)
+    owner = models.OneToOneField(Profile, on_delete=models.CASCADE)
     tagline = models.CharField(max_length=200)
     name = models.CharField(max_length=100)
     def __str__(self) ->str:
         return self.name
+    
+    class Meta:
+        app_label = 'core'
+
 
     
 class Category(models.Model):
@@ -19,6 +23,8 @@ class Category(models.Model):
 
     def __str__(self) ->str:
         return self.name
+    class Meta:
+        app_label = 'core'
 
 class Products(models.Model):
     # owner
@@ -31,6 +37,9 @@ class Products(models.Model):
     date_created = models.DateField(auto_now_add=True )
     rating = models.IntegerField()
 
+   
+
+
     def discount(self, discount=20):
         self.price = self.price * (discount/100)
         return self.price
@@ -39,11 +48,12 @@ class Products(models.Model):
     def __str__(self) -> str:
         return f"{self.name},{self.desc} {self.price}"
  
- # decribes the behaviout of your modeln
-class Meta:
-    ordering = {'name', '-price',}
-    verbose_name = 'products'
-    constraints = [models.CheckConstraint(check=Q('price__gt=12000'), name="price_gt_12000")]
+#  # decribes the behaviout of your modeln
+#     class Meta:
+#         ordering = {'name', '-price',}
+#         verbose_name = 'products'
+#         constraints = [models.CheckConstraint(check=model.Q('price__gt=12000'), name="price_gt_12000")]
+#         app_label = 'core'
     
 
 

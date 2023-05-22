@@ -1,0 +1,21 @@
+{%{% extends 'base.html' %}%}
+{%block content%}
+<form action="/account/login method" method = "post">
+    <h2> Sell Easy </h2>
+    {%if err%}
+    <p>Email or password not correct</p>
+    <p> {{err}} </p>
+    {%{% endif %}%}
+    {{form.as}}
+    <input type="submit" value="login">
+    
+    {{form}}
+</form>
+
+
+ 
+{%endblock%}
+
+
+
+# the token is prevent cross site request forgery: security purpose
